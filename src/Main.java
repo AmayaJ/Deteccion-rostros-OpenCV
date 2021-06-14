@@ -21,15 +21,15 @@ public class Main
         CascadeClassifier faceDetector = new CascadeClassifier();
 
         faceDetector.load("C:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml");
-        System.out.println ( "Working" );
-        // Input image
+        System.out.println ( "Iniciando proceso..." );
+        // Se lee la imagen
         Mat image = Imgcodecs.imread("C:\\Users\\amaya\\eclipse-workspace3\\DeteccionRostros\\images\\imagenGente.jpg");
 
-        // Detecting faces
+        // Detección de rostros
         MatOfRect faceDetections = new MatOfRect();
         faceDetector.detectMultiScale(image, faceDetections);
 
-        // Creating a rectangular box showing faces detected
+        // Crea un rectángulo en la cara detectadas
         Rect rectCrop=null;
         for (Rect rect : faceDetections.toArray())
         {
@@ -39,10 +39,10 @@ public class Main
             rectCrop = new Rect(rect.x, rect.y, rect.width, rect.height);
         }
 
-        // Saving the output image
+        // Se crear una imagen con las caras detectadas
         String filename = "Ouput.jpg";
         Imgcodecs.imwrite("C:\\Users\\amaya\\eclipse-workspace3\\DeteccionRostros\\images\\"+filename, image);
-
+        // Se recorta la imagen solo con el rostro detectado
         Mat markedImage = new Mat(image,rectCrop);
         Imgcodecs.imwrite("C:\\Users\\amaya\\eclipse-workspace3\\DeteccionRostros\\images\\cropimage.jpg",markedImage );
     }
